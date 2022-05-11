@@ -41,4 +41,12 @@ services:
     ports:
       - "8080:80"
 
-
+  vue:
+    build:
+      context: ../app
+      dockerfile: ../docker/vue/Dockerfile
+    volumes:
+      - ../app:/var/www
+      - /app/node_modules
+    ports:
+      - "8081:8081"
