@@ -1,6 +1,6 @@
-FROM node:14.14.0
+FROM node:12.22.12
 
-WORKDIR /var/www
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run serve
+CMD ["npm", "run", "serve"]
 
 EXPOSE 8081

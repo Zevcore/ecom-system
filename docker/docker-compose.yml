@@ -46,7 +46,7 @@ services:
       context: ../app
       dockerfile: ../docker/vue/Dockerfile
     volumes:
-      - ../app:/var/www
+      - ../app:/app
       - /app/node_modules
     ports:
       - "8081:8081"
