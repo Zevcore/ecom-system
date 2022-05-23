@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Product from "../views/Product";
 
 const routes = [
   {
@@ -15,6 +16,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    // TODO: Rozważyć zmianę z ID produktu na kebab-cased nazwę produktu, albo mix obu (id-nazwa-produktu).
+    path: "/product/:id(\\d+)",
+    alias: ["/product/view/:id(\\d+)"],
+    name: "Product",
+    component: Product,
   },
 ];
 
