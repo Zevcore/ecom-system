@@ -21,11 +21,16 @@ services:
     depends_on:
       - database
     environment:
+      - XDEBUG_CONFIG=remote_host=172.17.0.1
+      - PHP_IDE_CONFIG=serverName=docker_server
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
       - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:3306/${DATABASE_NAME}?serverVersion=5.7
     volumes:
-      - ../api:/var/www
+      - ../api/:/var/www
+      - ./php-fpm/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    extra_hosts:
+      - host.docker.internal:host-gateway
 
   nginx:
     build:
@@ -41,12 +46,12 @@ services:
     ports:
       - "8080:80"
 
-  vue:
-    build:
-      context: ../app
-      dockerfile: ../docker/vue/Dockerfile
-    volumes:
-      - ../app:/app
-      - /app/node_modules
-    ports:
-      - "8081:8081"
+#  vue:
+#    build:
+#      context: ../app
+#      dockerfile: ../docker/vue/Dockerfile
+#    volumes:
+#      - ../app:/app
+#      - /app/node_modules
+#    ports:
+#      - "8081:8081"
