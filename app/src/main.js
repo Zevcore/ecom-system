@@ -1,15 +1,20 @@
-import { createApp } from "vue"
-import App from "./App.vue"
-import router from "./router"
-import store from "./store"
-import api from "./api"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import { createApp } from "vue";
+import App from "./App.vue";
 
-const app = createApp(App)
+// Services
+import router from "./services/router.js";
+import store from "./services/store.js";
+import api from "./services/api.js";
 
-app.use(store).use(router)
+// Plugins
+import VueClickAwayPlugin from "vue3-click-away";
 
-app.config.globalProperties.$api = api
+// Bootstrap
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
+const app = createApp(App);
+app.use(store).use(router).use(VueClickAwayPlugin);
+app.config.globalProperties.$api = api;
 app.mount("#app");
