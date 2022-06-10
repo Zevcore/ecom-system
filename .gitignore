@@ -1,2 +1,4 @@
 .idea
+docker/database/data
+.idea
 api/node_modules

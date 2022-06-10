@@ -1,32 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/product/1">Example product page</router-link>
+  <div class="app-container">
+    <header>
+      <the-navigation></the-navigation>
+    </header>
 
+    <main class="col-lg-9 mx-auto mt-lg-4 mb-3">
+      <router-view />
+    </main>
+
+    <the-footer></the-footer>
   </div>
-  <router-view />
 </template>
 
+<script>
+import TheNavigation from "@/components/TheNavigation";
+import detectMobileMixin from "@/mixins/detectMobile";
+import TheFooter from "@/components/TheFooter";
+export default {
+  name: "App",
+
+  components: {
+    TheFooter,
+    TheNavigation,
+  },
+
+  mixins: [detectMobileMixin],
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.price-tag {
+  &:after {
+    content: " PLN";
+  }
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.discount-tag {
+  &:before {
+    content: "-";
+  }
+  &:after {
+    content: "%";
   }
 }
 </style>
