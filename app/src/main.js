@@ -16,5 +16,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const app = createApp(App);
 app.use(store).use(router).use(VueClickAwayPlugin);
+
 app.config.globalProperties.$api = api;
+app.config.globalProperties.$appName = "Ecom-system";
+
 app.mount("#app");

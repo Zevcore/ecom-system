@@ -1,9 +1,12 @@
 <template>
-  <div>
+  <div class="row ms-0 me-0 mx-lg-auto">
     <!-- TODO: Rozważyć dodanie breadcrumbsów. -->
-    <products-show-carousel :images="product.images"></products-show-carousel>
+    <products-show-carousel
+      :images="product.images"
+      class="px-0 col-lg-5 mb-lg-2"
+    ></products-show-carousel>
 
-    <div class="container-fluid">
+    <div class="container-fluid col-lg-6">
       <p class="text-muted small">
         Product ID: <b>{{ product.id }}</b>
       </p>
