@@ -1,2 +1,4 @@
 app/node_modules
 docker/database/data
+api/node_modules
+api/npm-debug.log
