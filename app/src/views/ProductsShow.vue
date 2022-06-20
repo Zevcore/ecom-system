@@ -42,7 +42,7 @@
       </div>
 
       <div class="d-grid mt-3">
-        <button type="button" class="btn btn-success btn-lg">
+        <button type="button" class="btn btn-success btn-lg" @click="addToCart">
           Add to cart
         </button>
       </div>
@@ -56,7 +56,10 @@ import ProductsShowSpecifications from "@/components/ProductsShowSpecifications"
 export default {
   name: "ProductsShow",
 
-  components: { ProductsShowSpecifications, ProductsShowCarousel },
+  components: {
+    ProductsShowSpecifications,
+    ProductsShowCarousel,
+  },
 
   data() {
     return {
@@ -112,6 +115,19 @@ export default {
         this.product.discountPercent !== undefined &&
         this.product.discountPercent !== 0
       );
+    },
+  },
+
+  methods: {
+    addToCart() {
+      if (this.$store.getters.isProductInCart(this.product.id)) {
+        console.info("Product is already in cart.");
+        return false;
+      }
+
+      this.$store.dispatch("addProductToCart", { productId: this.product.id });
+      console.info("Product added to cart.");
+      return true;
     },
   },
 };
