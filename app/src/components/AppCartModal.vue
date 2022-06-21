@@ -5,6 +5,7 @@
     tabindex="-1"
     aria-labelledby="cartModalLabel"
     aria-hidden="true"
+    v-on="{ 'hidden.bs.modal': resetContent }"
   >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -27,9 +28,11 @@
             Close
           </button>
           <router-link
+            v-if="content.footerButton"
             :to="content.footerButton.linkTo"
             type="button"
             class="btn btn-primary"
+            @click="clickedCartModalButton"
           >
             {{ content.footerButton.text }}
           </router-link>
@@ -40,56 +43,103 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import { Modal } from "bootstrap";
+import { mapState } from "vuex";
 export default {
   name: "AppCartModal",
 
   data() {
     return {
-      state: String,
+      cartModal: Modal,
       content: {
-        title: String,
-        body: String,
+        title: "",
+        body: "",
         footerButton: {
-          text: String,
-          linkTo: String,
+          text: "",
+          linkTo: "",
         },
       },
     };
   },
 
-  computed: {
-    ...mapGetters(["cartProductsCount"]),
-  },
+  computed: mapState({
+    status: "cartModalStatus",
+    product: "productToRemove",
+  }),
 
   watch: {
-    cartProductsCount(newValue, oldValue) {
-      if (newValue > oldValue) {
-        this.state = "add";
-      } else {
-        this.state = "remove";
+    status() {
+      if (!this.status) {
+        return false;
       }
-      this.updateModalContent();
 
-      const cartModal = new Modal(document.getElementById("cartModal"));
-      cartModal.show();
+      this.updateModalContent();
+      this.cartModal.show();
+
+      if (this.status !== "removed") {
+        this.$store.dispatch("changeCartModalStatus", { status: null });
+      }
     },
+  },
+
+  mounted() {
+    this.cartModal = new Modal(document.getElementById("cartModal"));
   },
 
   methods: {
     updateModalContent() {
-      if (this.state === "add") {
+      if (this.status === "added") {
         this.content = {
           title: "Added product to cart",
           body: "You can either continue shopping or go to your cart to finish your order.",
           footerButton: {
             text: "Go to Cart",
-            linkTo: "/",
-            // linkTo: { name: "Cart" },
+            linkTo: { name: "Cart" },
+          },
+        };
+      } else if (this.status === "duplicated") {
+        this.content = {
+          title: "Product already in cart",
+          body: "This product is already in your cart and you can't add another one.",
+          footerButton: null,
+        };
+      } else if (this.status === "removed" && this.product) {
+        this.content = {
+          title: "Remove product from cart",
+          body: "Are you sure that you want to remove this product from your cart?",
+          footerButton: {
+            text: "Confirm",
+            linkTo: "",
           },
         };
       }
+    },
+
+    clickedCartModalButton() {
+      this.cartModal.hide();
+
+      if (this.status === "removed") {
+        this.$store.dispatch("updateCartValue", {
+          value: -this.product.value,
+        });
+
+        this.$store.dispatch("removeProductFromCart", {
+          productId: this.product.id,
+        });
+
+        this.$store.dispatch("changeCartModalStatus", { status: null });
+      }
+    },
+
+    resetContent() {
+      this.content = {
+        title: "",
+        body: "",
+        footerButton: {
+          text: "",
+          linkTo: "",
+        },
+      };
     },
   },
 };

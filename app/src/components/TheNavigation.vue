@@ -22,7 +22,8 @@
       </button>
     </div>
 
-    <button
+    <router-link
+      :to="{ name: 'Cart' }"
       type="button"
       class="btn bi bi-cart text-light fs-4 order-lg-last ms-auto position-relative"
     >
@@ -32,7 +33,7 @@
         {{ cartProductsCount }}
         <span class="visually-hidden">amount of products in cart</span>
       </span>
-    </button>
+    </router-link>
 
     <div
       class="collapse navbar-collapse order-last order-lg-2"
