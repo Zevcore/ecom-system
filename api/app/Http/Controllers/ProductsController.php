@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductsCollection;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class ProductsController extends Controller
         return response(Product::all(), 200);
     }
 
-    public function store(Request $request): Response
+    public function store(StoreProductRequest $request): Response
     {
 
         $product = Product::create([
@@ -39,7 +40,7 @@ class ProductsController extends Controller
 
     }
 
-    public function update(Request $request, $id): Response
+    public function update(StoreProductRequest $request, $id): Response
     {
         $product = Product::findOrFail($id);
 
