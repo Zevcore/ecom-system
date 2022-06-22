@@ -38,30 +38,18 @@ services:
       context: ../api
       dockerfile: ../docker/laravel/Dockerfile
     volumes:
-      - ../api:/var/www/html
+      - ../app:/app
+      - /app/node_modules
     ports:
-      - "9000:9000"
-    networks:
-      - laravel
+      - "8081:8081"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
-
-#  db:
-#    image: mariadb:10.2
-#    environment:
-#      MYSQL_DATABASE: ${DATABASE_NAME}
-#      MYSQL_USER: ${DATABASE_USER}
-#      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-#      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-#    ports:
-#      - 3306:3306
-#    volumes:
-#      - db:/var/lib/mysql
-#
-#  vue:
-#    build:
-#      context: ../app
-#      dockerfile: ../docker/vue/Dockerfile
-#    volumes:
-#      - ../app:/app
-#    ports:
-#      - "8081:8081"
+  vue:
+   build:
+     context: ../app
+     dockerfile: ../docker/vue/Dockerfile
+   volumes:
+     - ../app:/app
+   ports:
+     - "8081:8081"

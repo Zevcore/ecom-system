@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home";
-import ProductsShow from "../views/ProductsShow";
+import Home from "@/views/Home";
+import ProductsShow from "@/views/ProductsShow";
+import Cart from "@/views/Cart";
 
 const routes = [
   {
@@ -15,11 +16,19 @@ const routes = [
     name: "ProductsShow",
     component: ProductsShow,
   },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: Cart,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  scrollBehavior() {
+    return { top: 0, behavior: "smooth" };
+  },
   linkActiveClass: "active",
   linkExactActiveClass: "active",
 });
