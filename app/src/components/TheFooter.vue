@@ -24,6 +24,10 @@ export default {
           text: "Example product",
           to: { name: "ProductsShow", params: { id: 1 } },
         },
+        {
+          text: "Cart",
+          to: { name: "Cart" },
+        },
       ],
     };
   },

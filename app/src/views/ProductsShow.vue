@@ -1,17 +1,16 @@
 <template>
   <div class="row ms-0 me-0 mx-lg-auto">
     <!-- TODO: Rozważyć dodanie breadcrumbsów. -->
-    <products-show-carousel
-      :images="product.images"
-      class="px-0 col-lg-5 mb-lg-2"
-    ></products-show-carousel>
+    <div class="container-fluid px-0 col-lg-5 mb-lg-2">
+      <products-show-carousel :images="product.images"></products-show-carousel>
+    </div>
 
     <div class="container-fluid col-lg-6">
       <p class="text-muted small">
         Product ID: <b>{{ product.id }}</b>
       </p>
 
-      <h1 class="h2 mb-3">{{ product.name }}</h1>
+      <h1 class="h2 mb-3">{{ product.name }} ({{ product.manufacturer }})</h1>
       <!-- TODO: Rozważyć dodanie oceny produktu. -->
 
       <p class="fs-6 fw-light">{{ product.description }}</p>
@@ -21,28 +20,15 @@
       ></products-show-specifications>
 
       <div class="container mt-2">
-        <div class="d-flex flex-column">
-          <s class="fs-6 fw-light text-muted price-tag" v-if="isProductOnSale">
-            {{ product.basePrice.toFixed(2) }}
-          </s>
-
-          <div class="d-flex align-items-center">
-            <span class="fs-1 fw-bold text-primary price-tag">
-              {{ productSellPrice.toFixed(2) }}
-            </span>
-
-            <span
-              class="fs-6 ms-2 badge bg-warning text-dark discount-tag"
-              v-if="isProductOnSale"
-            >
-              {{ Math.round(product.discountPercent) }}
-            </span>
-          </div>
-        </div>
+        <app-price-tag
+          :base-price="product.basePrice"
+          :discount-percent="product.discountPercent"
+          ref="priceTag"
+        ></app-price-tag>
       </div>
 
       <div class="d-grid mt-3">
-        <button type="button" class="btn btn-success btn-lg">
+        <button type="button" class="btn btn-success btn-lg" @click="addToCart">
           Add to cart
         </button>
       </div>
@@ -53,16 +39,22 @@
 <script>
 import ProductsShowCarousel from "@/components/ProductsShowCarousel";
 import ProductsShowSpecifications from "@/components/ProductsShowSpecifications";
+import AppPriceTag from "@/components/AppPriceTag";
 export default {
   name: "ProductsShow",
 
-  components: { ProductsShowSpecifications, ProductsShowCarousel },
+  components: {
+    AppPriceTag,
+    ProductsShowSpecifications,
+    ProductsShowCarousel,
+  },
 
   data() {
     return {
       product: {
         id: this.$route.params.id,
-        name: "Very good graphics card (Nvidia)",
+        name: "Very good graphics card",
+        manufacturer: "Nvidia",
         description:
           "Is very good graphics card I sell go buy please, I use for many years it work real nice much recommend haha cheers yes.",
         basePrice: 420.0,
@@ -98,20 +90,23 @@ export default {
     };
   },
 
-  computed: {
-    productReducedPrice() {
-      return (this.product.discountPercent / 100) * this.product.basePrice;
-    },
+  methods: {
+    addToCart() {
+      if (this.$store.getters.isProductInCart(this.product.id)) {
+        this.$store.dispatch("changeCartModalStatus", { status: "duplicated" });
 
-    productSellPrice() {
-      return this.product.basePrice - this.productReducedPrice;
-    },
+        console.info("Product is already in cart.");
+        return false;
+      }
 
-    isProductOnSale() {
-      return (
-        this.product.discountPercent !== undefined &&
-        this.product.discountPercent !== 0
-      );
+      this.$store.dispatch("addProductToCart", { productId: this.product.id });
+      this.$store.dispatch("updateCartValue", {
+        value: this.$refs.priceTag.$data.sellPrice,
+      });
+      this.$store.dispatch("changeCartModalStatus", { status: "added" });
+
+      console.info("Product added to cart.");
+      return true;
     },
   },
 };
