@@ -17,19 +17,21 @@ class ProductsController extends Controller
 
     public function store(StoreProductRequest $request): Response
     {
+        if($request->validated()) {
+            $product = Product::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'images' => json_encode(json_decode($request->images)),
+                'stock' => $request->stock,
+                'specifications' => json_encode(json_decode($request->specifications)),
+                'basePrice' => $request->basePrice,
+                'discountPercent' => $request->discountPercent,
+                'manufacturer' => $request->manufacturer
+            ]);
 
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'images' => json_encode(json_decode($request->images)),
-            'stock' => $request->stock,
-            'specifications' => json_encode(json_decode($request->specifications)),
-            'basePrice' => $request->basePrice,
-            'discountPercent' => $request->discountPercent,
-            'manufacturer' => $request->manufacturer
-        ]);
-
-        return response($product, 200);
+            return response($product, 200);
+        }
+        return response("Validation error", 400);
     }
 
     public function show($id): Response
@@ -42,21 +44,25 @@ class ProductsController extends Controller
 
     public function update(StoreProductRequest $request, $id): Response
     {
-        $product = Product::findOrFail($id);
+        if($request->validated()) {
+            $product = Product::findOrFail($id);
+            $product->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'images' => json_encode(json_decode($request->images)),
+                'stock' => $request->stock,
+                'specifications' => json_encode(json_decode($request->specifications)),
+                'basePrice' => $request->basePrice,
+                'discountPercent' => $request->discountPercent,
+                'manufacturer' => $request->manufacturer
+            ]);
 
-        $product = Product::update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'images' => json_encode(json_decode($request->images)),
-            'stock' => $request->stock,
-            'specifications' => json_encode(json_decode($request->specifications)),
-            'basePrice' => $request->basePrice,
-            'discountPercent' => $request->discountPercent,
-            'manufacturer' => $request->manufacturer
-        ]);
-        $product->save();
+            $product->save();
 
-        return response($product, 200);
+            return response($product, 200);
+        }
+
+        return response("Validation error", 400);
     }
 
     public function destroy($id): Response
