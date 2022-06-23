@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class ProductSeeder extends Seeder
         $images = [
             0 => [
                 "id" => 1,
-                "src" => "http://test.test/test.png",
+                "src" => "https://via.placeholder.com/300",
                 "alt" => "Alternative text",
                 "active" => "true",
             ]
