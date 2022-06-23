@@ -38,18 +38,17 @@ services:
       context: ../api
       dockerfile: ../docker/laravel/Dockerfile
     volumes:
-      - ../app:/app
-      - /app/node_modules
+      - ../api:/var/www/html
     ports:
-      - "8081:8081"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+      - "9000:9000"
+    networks:
+      - laravel
 
-  vue:
-   build:
-     context: ../app
-     dockerfile: ../docker/vue/Dockerfile
-   volumes:
-     - ../app:/app
-   ports:
-     - "8081:8081"
+#  vue:
+#    build:
+#      context: ../app
+#      dockerfile: ../docker/vue/Dockerfile
+#    volumes:
+#      - ../app:/app
+#    ports:
+#      - "8081:8081"
