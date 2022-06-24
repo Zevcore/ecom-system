@@ -1,5 +1,9 @@
 <template>
-  <div class="row ms-0 me-0 mx-lg-auto">
+  <div class="row mt-4" v-if="loading">
+    <p class="display-1 text-center">Loading...</p>
+  </div>
+
+  <div class="row ms-0 me-0 mx-lg-auto" v-else>
     <!-- TODO: Rozważyć dodanie breadcrumbsów. -->
     <div class="container-fluid px-0 col-lg-5 mb-lg-2">
       <products-show-carousel :images="product.images"></products-show-carousel>
@@ -52,42 +56,23 @@ export default {
   data() {
     return {
       product: {
-        id: this.$route.params.id,
-        name: "Very good graphics card",
-        manufacturer: "Nvidia",
-        description:
-          "Is very good graphics card I sell go buy please, I use for many years it work real nice much recommend haha cheers yes.",
-        basePrice: 420.0,
-        discountPercent: 83.571,
-        stock: 15,
-        specifications: [
-          "16GB 256-Bit GDDR6",
-          "Boost Clock 2105 MHz",
-          "1 x HDMI 2.1 VRR, 2 x DisplayPort 1.4",
-          "3840 Stream Processors",
-          "PCI Express 4.0 x16",
-          "AMD RDNA 2",
-        ],
-        images: [
-          {
-            id: 1,
-            src: "https://via.placeholder.com/300",
-            alt: "Placeholder image.",
-            active: true,
-          },
-          {
-            id: 2,
-            src: "https://via.placeholder.com/300",
-            alt: "Placeholder image.",
-          },
-          {
-            id: 3,
-            src: "https://via.placeholder.com/300",
-            alt: "Placeholder image.",
-          },
-        ],
+        id: null,
+        name: "",
+        manufacturer: "",
+        description: "",
+        basePrice: 0.0,
+        discountPercent: 0,
+        stock: 0,
+        specifications: [],
+        images: [],
       },
+
+      loading: true,
     };
+  },
+
+  beforeMount() {
+    this.getProductFromApi();
   },
 
   methods: {
@@ -107,6 +92,19 @@ export default {
 
       console.info("Product added to cart.");
       return true;
+    },
+
+    async getProductFromApi() {
+      const product = await this.$api.helpGet(
+        "products/" + this.$route.params.id
+      );
+
+      this.loading = false;
+
+      this.product = product;
+      this.product.basePrice = Number(product.basePrice);
+      this.product.images = JSON.parse(product.images);
+      this.product.specifications = JSON.parse(product.specifications);
     },
   },
 };
