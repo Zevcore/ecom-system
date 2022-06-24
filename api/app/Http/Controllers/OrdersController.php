@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Resources\OrdersCollection;
 use App\Models\Order;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class OrdersController extends Controller
 
     }
 
-    public function update(StoreProductRequest $request, $id): Response
+    public function update(StoreOrderRequest $request, $id): Response
     {
         if($request->validated()) {
             $order = Order::findOrFail($id);
