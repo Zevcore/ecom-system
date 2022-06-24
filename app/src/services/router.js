@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home";
 import ProductsShow from "@/views/ProductsShow";
 import Cart from "@/views/Cart";
+import ProductsIndex from "@/views/ProductsIndex";
 
 const routes = [
   {
@@ -15,6 +16,12 @@ const routes = [
     alias: ["/product/view/:id(\\d+)"],
     name: "ProductsShow",
     component: ProductsShow,
+  },
+  {
+    path: "/products/:page(\\d+)?",
+    alias: ["/product/index/:page(\\d+)?"],
+    name: "ProductsIndex",
+    component: ProductsIndex,
   },
   {
     path: "/cart",

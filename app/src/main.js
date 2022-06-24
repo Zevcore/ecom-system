@@ -4,7 +4,7 @@ import App from "./App.vue";
 // Services
 import router from "./services/router.js";
 import store from "./services/store.js";
-import api from "./services/api.js";
+import api from "./helpers/api.js";
 
 // Plugins
 import VueClickAwayPlugin from "vue3-click-away";
