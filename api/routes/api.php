@@ -22,8 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['cors'])->group(function () {
     Route::resource("products", ProductsController::class);
-});
-
-Route::middleware(['cors'])->group(function () {
     Route::resource("orders", OrdersController::class);
 });
