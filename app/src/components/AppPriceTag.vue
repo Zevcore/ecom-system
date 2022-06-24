@@ -7,7 +7,7 @@
     <div class="d-flex align-items-center">
       <span
         class="fs-1 fw-bold text-primary price-tag"
-        :class="{ 'fs-3': isSmall }"
+        :class="{ 'fs-4': isSmall }"
       >
         {{ sellPrice.toFixed(2) }}
       </span>
@@ -72,7 +72,7 @@ export default {
     },
   },
 
-  mounted() {
+  beforeMount() {
     this.setProductSellPrice();
   },
 };

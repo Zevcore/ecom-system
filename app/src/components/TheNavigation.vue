@@ -67,8 +67,12 @@ export default {
       items: [
         { text: "Home", to: { name: "Home" } },
         {
-          text: "Example product",
+          text: "Product",
           to: { name: "ProductsShow", params: { id: 1 } },
+        },
+        {
+          text: "Listing",
+          to: { name: "ProductsIndex" },
         },
       ],
     };
