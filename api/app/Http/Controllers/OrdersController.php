@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Resources\OrdersCollection;
+use App\Lib\Cart\Cart;
+use App\Lib\Status\Statuses;
 use App\Models\Order;
 use Illuminate\Http\Response;
-use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+
     public function index(): Response
     {
         return response(Order::all(), 200);
@@ -17,14 +19,17 @@ class OrdersController extends Controller
 
     public function store(StoreOrderRequest $request): Response
     {
+        $requestCart = json_decode($request->cart);
+        $cart = new Cart($requestCart->total, (array) $requestCart->items);
+
         if($request->validated()) {
             $order = Order::create([
                 'name' => $request->name,
                 'surname' => $request->surname,
                 'address' => $request->address,
                 'email' => $request->email,
-                'status' => "EXPORTED",
-                'cart' => json_encode(json_decode($request->cart)),
+                'status' => Statuses::STATUS_CREATED,
+                'cart' => json_encode($cart->show()),
                 'value' => $request->value,
             ]);
 
@@ -43,15 +48,19 @@ class OrdersController extends Controller
 
     public function update(StoreOrderRequest $request, $id): Response
     {
+        $requestCart = json_decode($request->cart);
+        $cart = new Cart($requestCart->total, (array) $requestCart->items);
+
         if($request->validated()) {
             $order = Order::findOrFail($id);
+
             $order->update([
                 'name' => $request->name,
                 'surname' => $request->surname,
                 'address' => $request->address,
                 'email' => $request->email,
-                'status' => "EXPORTED",
-                'cart' => json_encode(json_decode($request->cart)),
+                'status' => Statuses::STATUS_UPDATED,
+                'cart' => json_encode($cart->show()),
                 'value' => $request->value,
             ]);
 
