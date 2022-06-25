@@ -3,6 +3,7 @@ import Home from "@/views/Home";
 import ProductsShow from "@/views/ProductsShow";
 import Cart from "@/views/Cart";
 import ProductsIndex from "@/views/ProductsIndex";
+import OrdersCreate from "@/views/OrdersCreate";
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: Cart,
+  },
+  {
+    path: "/order/create",
+    name: "OrdersCreate",
+    component: OrdersCreate,
   },
 ];
 

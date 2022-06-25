@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Lib\Status\Statuses;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class OrderSeeder extends Seeder
             'surname' => 'Smith',
             'address' => 'xxx xx xx xx',
             'email' => "john.smith@yahoo.com",
+            'status' => Statuses::STATUS_CREATED,
             'cart' => json_encode($cart),
             'value' => 42.0,
         ]);

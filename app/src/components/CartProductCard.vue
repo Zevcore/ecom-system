@@ -8,11 +8,7 @@
     >
       <span class="visually-hidden">remove product from cart</span>
     </button>
-    <img
-      :src="product.image.src"
-      class="card-img-top"
-      :alt="product.image.alt"
-    />
+    <img :src="mainImage.src" class="card-img-top" :alt="mainImage.alt" />
     <div class="card-body">
       <h5 class="card-title">
         <router-link :to="{ name: 'ProductsShow', params: { id: product.id } }">
@@ -25,7 +21,7 @@
     </div>
     <div class="card-footer">
       <app-price-tag
-        :base-price="product.basePrice"
+        :base-price="basePrice"
         :discount-percent="product.discountPercent"
         ref="priceTag"
         is-small
@@ -46,6 +42,19 @@ export default {
       required: true,
       type: Object,
     },
+  },
+
+  data() {
+    return {
+      mainImage: "",
+      basePrice: 0.0,
+    };
+  },
+
+  beforeMount() {
+    this.mainImage = JSON.parse(this.product.images)[0];
+
+    this.basePrice = Number(this.product.basePrice);
   },
 
   methods: {

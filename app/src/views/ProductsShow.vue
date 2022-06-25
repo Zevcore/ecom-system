@@ -11,7 +11,7 @@
 
     <div class="container-fluid col-lg-6">
       <p class="text-muted small">
-        Product ID: <b>{{ product.id }}</b>
+        Product ID: <b>{{ $route.params.id }}</b>
       </p>
 
       <h1 class="h2 mb-3">{{ product.name }} ({{ product.manufacturer }})</h1>
@@ -71,20 +71,26 @@ export default {
     };
   },
 
+  computed: {
+    productId() {
+      return this.$route.params.id;
+    },
+  },
+
   beforeMount() {
     this.getProductFromApi();
   },
 
   methods: {
     addToCart() {
-      if (this.$store.getters.isProductInCart(this.product.id)) {
+      if (this.$store.getters.isProductInCart(this.productId)) {
         this.$store.dispatch("changeCartModalStatus", { status: "duplicated" });
 
         console.info("Product is already in cart.");
         return false;
       }
 
-      this.$store.dispatch("addProductToCart", { productId: this.product.id });
+      this.$store.dispatch("addProductToCart", { productId: this.productId });
       this.$store.dispatch("updateCartValue", {
         value: this.$refs.priceTag.$data.sellPrice,
       });
@@ -95,9 +101,7 @@ export default {
     },
 
     async getProductFromApi() {
-      const product = await this.$api.helpGet(
-        "products/" + this.$route.params.id
-      );
+      const product = await this.$api.helpGet("products/" + this.productId);
 
       this.loading = false;
 
