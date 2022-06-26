@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app {
+    font-family: 'Open Sans', sans-serif;
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.app img {
+    width: 200px;
+}
+
+.app h1 {
+    margin: 30px 0 0 0;
+    font-weight: normal;
+}
+
+.app .description {
+    margin: 0 0 30px 0;
+}
+
+.app .creators {
+    display: flex;
+    flex-direction: column;
+}
+
+.app .creators p.desc {
+    margin: 0 0 15px 0;
+}
+.app .creators .creator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.app .creators .creator .creator-name {
+    font-weight: lighter;
+}
+
+.app .creators .creator .creator-title {
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    background-color: #3d3d3d;
+    padding: 10px 5px;
+    border-radius: 15px;
+}
+
+.app .creators hr {
+    margin: 5px 0;
+}
+
+.footer {
+    margin: 30px 0 0 0;
+}
