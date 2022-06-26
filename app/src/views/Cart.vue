@@ -84,7 +84,11 @@ export default {
   },
 
   beforeMount() {
-    this.getProductsData();
+    if (this.cartProductsCount > 0) {
+      this.getProductsData();
+    } else {
+      this.loading = false;
+    }
   },
 };
 </script>

@@ -196,6 +196,8 @@ export default {
     async storeOrder() {
       await this.$api.helpPost("orders", JSON.stringify(this.order));
 
+      this.$store.dispatch("clearCart");
+
       this.processing = false;
       this.success = true;
     },

@@ -51,6 +51,11 @@ export default createStore({
     updateCartValue(state, payload) {
       state.cartValue += Math.round(payload.value);
     },
+
+    clearCart(state) {
+      state.cartProducts = [];
+      state.cartValue = 0;
+    },
   },
 
   actions: {
@@ -68,6 +73,10 @@ export default createStore({
 
     updateCartValue(context, payload) {
       context.commit("updateCartValue", payload);
+    },
+
+    clearCart(context) {
+      context.commit("clearCart");
     },
   },
 
