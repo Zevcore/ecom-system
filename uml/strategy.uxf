@@ -1,0 +1,19 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>400</x><y>170</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Context&gt;&gt;
+OrderController
+--
+index(): Response
+store(request): Response
+show(id): Response
+update(request, id): Response
+destroy(id): Response
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>170</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Strategy&gt;&gt;
+Order
+--
+-guarded: Array
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>700</x><y>490</y><w>210</w><h>120</h></coordinates><panel_attributes>Model
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>480</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+Status
+--
+getStatus(): String
+setStatus(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>250</y><w>120</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>350</y><w>30</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>350</y><w>220</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>200;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>350</y><w>90</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element></diagram>

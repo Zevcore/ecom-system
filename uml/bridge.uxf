@@ -1,0 +1,14 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>1100</x><y>290</y><w>100</w><h>30</h></coordinates><panel_attributes>Client</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>210</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Abstraction&gt;&gt;
+Abstract Cart
+--
+-total: Float
+_-items: array_
+--
+show(): Array
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>810</x><y>210</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+Cart
+--
+-timestamp: DateTime
+--
+show(): Array
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>290</y><w>130</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>110;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>290</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1010</x><y>290</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element></diagram>
