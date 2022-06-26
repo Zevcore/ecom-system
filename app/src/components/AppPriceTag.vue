@@ -6,8 +6,8 @@
 
     <div class="d-flex align-items-center">
       <span
-        class="fs-1 fw-bold text-primary price-tag"
-        :class="{ 'fs-4': isSmall }"
+        class="fw-bold text-primary price-tag"
+        :class="{ 'fs-5': isSmall, 'fs-1': !isSmall }"
       >
         {{ sellPrice.toFixed(2) }}
       </span>

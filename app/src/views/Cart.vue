@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="container-fluid col-lg-5 mt-5 mt-lg-0">
+      <div class="container-fluid col-lg-5 mt-5 mt-lg-4">
         <div class="cart-value">
           <p class="text-center h4">
             Cart value:
