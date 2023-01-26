@@ -8,6 +8,7 @@ export default defineConfig({
   server: {
     host: true,
   },
+  usePolling: true,
   plugins: [vue()],
   resolve: {
     alias: {

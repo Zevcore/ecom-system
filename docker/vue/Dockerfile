@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN chmod -R 777 node_modules
+
 CMD ["npm", "run", "serve"]
 
 EXPOSE 8081
