@@ -55,3 +55,13 @@ services:
       - "8081:8081"
     environment:
       - CHOKIDAR_USEPOLLING=true
+
+  cms:
+    build:
+      context: ../cms
+      dockerfile: ../docker/cms/Dockerfile
+    volumes:
+      - ../cms:/cms
+      - /cms/node_modules
+    ports:
+      - "5173:5173"
