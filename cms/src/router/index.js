@@ -1,23 +1,55 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Dashboard from "../views/Dashboard.vue";
+import ProductsIndex from "../views/ProductsIndex.vue";
+import OrdersIndex from "../views/OrdersIndex.vue";
+import UsersIndex from "../views/UsersIndex.vue";
+
+const routes = [
+  {
+    path: "/",
+    name: "Panel główny",
+    component: Dashboard,
+  },
+  // {
+  //   path: "/product/:id(\\d+)",
+  //   alias: ["/product/view/:id(\\d+)"],
+  //   name: "Produkt",
+  //   component: ProductsShow,
+  // },
+  {
+    path: "/products/:page(\\d+)?",
+    alias: ["/product/index/:page(\\d+)?"],
+    name: "Produkty",
+    component: ProductsIndex,
+  },
+  {
+    path: "/orders/:page(\\d+)?",
+    alias: ["/order/index/:page(\\d+)?"],
+    name: "Zamówienia",
+    component: OrdersIndex,
+  },
+  {
+    path: "/users/:page(\\d+)?",
+    alias: ["/users/index/:page(\\d+)?"],
+    name: "Użytkownicy",
+    component: UsersIndex,
+  },
+  // {
+  //   path: "/order/:id(\\d+)",
+  //   alias: ["/order/view/:id(\\d+)"],
+  //   name: "Zamówienie",
+  //   component: ProductsShow,
+  // },
+];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: HomeView,
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
-    },
-  ],
+  history: createWebHistory(),
+  routes,
+  scrollBehavior() {
+    return { top: 0, behavior: "smooth" };
+  },
+  linkActiveClass: "active",
+  linkExactActiveClass: "active",
 });
 
 export default router;
