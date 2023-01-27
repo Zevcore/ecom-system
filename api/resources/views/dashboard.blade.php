@@ -28,7 +28,7 @@
         </section>
 
         <p class="footer">
-            Na zaliczenie przedmiotu <br> <b>Programowanie Aplikacji Internetowych</b>
+            Na zaliczenie przedmiotu <br> <b>Projekt Systemu Informatycznego</b>
         </p>
 
     </section>

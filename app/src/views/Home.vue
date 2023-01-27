@@ -26,7 +26,7 @@
 
       <p class="mt-3 text-center">
         Na zaliczenie przedmiotu <br />
-        <b>Programowanie&nbsp;Aplikacji&nbsp;Internetowych</b>
+        <b>Projekt&nbsp;Systemu&nbsp;Informatycznego</b>
       </p>
     </div>
   </div>

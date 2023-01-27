@@ -21,7 +21,7 @@
 Aplikacja sklepu internetowego typu e-commerce. Została zbudowana za pomocą
 frameworku Vue do wydzielenia clienta oraz Laravel do REST API. Backend komunikuje się
 z frontendem za pomocą requestów HTTP. Dodatkowo została wykorzystana baza danych MySQL, która
-przechowuje dane pobierane przez API. Laravel renderuje także widoki CMS.
+przechowuje dane pobierane przez API. Aplikacja CMS zbudowana jest na Vue.js v3 i komunikuje się z REST API poprzez protokół HTTPS.
 
 ### Członkowie zespołu
 - Piotr Jarema - Scrum Master
@@ -29,7 +29,7 @@ przechowuje dane pobierane przez API. Laravel renderuje także widoki CMS.
 - Mikołaj Pięcek - Developer
 - Dariusz Letkiewicz - Graphic Designer
 
-Aplikacja, której kodu użyto do identyikacji wzorców projektowych: **Projekt z przedmiotu Programowanie Aplikacji Internetowych**
+Aplikacja, której kodu użyto do identyikacji wzorców projektowych: **Projekt z przedmiotu Projekt Systemu Informatycznego**
 
 ### Wzorce projektowe
 
