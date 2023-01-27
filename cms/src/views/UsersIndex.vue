@@ -1,6 +1,6 @@
 <template>
   <div v-if="users.length > 0">
-    <DataTable :data="this.tableData"></DataTable>
+    <DataTable table-name="users" :data="this.tableData"></DataTable>
     <TablePagination :align="'center'" :class="'my-3'"></TablePagination>
   </div>
   <div v-else>

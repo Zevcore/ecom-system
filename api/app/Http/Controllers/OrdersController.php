@@ -49,7 +49,7 @@ class OrdersController extends Controller
     public function update(StoreOrderRequest $request, $id): Response
     {
         $requestCart = json_decode($request->cart);
-        $cart = new Cart($requestCart->total, (array) $requestCart->items);
+        $cart = new Cart($request->value, (array) $requestCart);
 
         if($request->validated()) {
             $order = Order::findOrFail($id);

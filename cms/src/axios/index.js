@@ -14,5 +14,7 @@ export default {
     helpPost: (url, data) => axiosClient.post(url, data).then((res) => res.data),
     helpPatch: (url, data) =>
         axiosClient.patch(url, data).then((res) => res.data),
+    helpPut: (url, data) =>
+        axiosClient.put(url, data).then((res) => res.data),
     helpDelete: (url) => axiosClient.delete(url),
 };

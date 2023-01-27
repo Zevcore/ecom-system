@@ -43,15 +43,15 @@
         </td>
 
         <td class="px-6 py-4 text-right">
-          <a
-              href="#"
+          <RouterLink
               class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
               v-for="actionButton in actionButtons"
               :key="actionButton.name"
               v-show="actionButton.visible"
+              :to="tableName + '/' + item.id + '/' + actionButton.action"
           >
             {{ actionButton.name }}
-          </a>
+          </RouterLink>
         </td>
       </tr>
       </tbody>
@@ -65,6 +65,11 @@ import ColumnSortIcon from "./icons/ColumnSortIcon.vue";
 export default {
   components: {ColumnSortIcon},
   props: {
+    tableName: {
+      required: false,
+      type: String,
+    },
+
     data: {
       required: true,
       type: Object,
@@ -93,15 +98,18 @@ export default {
     return {
       actionButtons: [
         {
-          name: 'Show',
+          name: 'Wyświetl',
+          action: 'show',
           visible: !this.hideShow,
         },
         {
-          name: 'Edit',
+          name: 'Edytuj',
+          action: 'edit',
           visible: !this.hideEdit,
         },
         {
-          name: 'Delete',
+          name: 'Usuń',
+          action: 'delete',
           visible: !this.hideDelete,
         },
       ]
